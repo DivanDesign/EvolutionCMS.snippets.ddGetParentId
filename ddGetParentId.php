@@ -1,7 +1,7 @@
 ﻿<?php
 /**
  * ddGetParentId.php
- * @version 1.0 (2011-12-18)
+ * @version 1.0.1 (2013-08-10)
  * 
  * @desc Gets the parent ID of the required level.
  * 
@@ -11,9 +11,9 @@
  * @param $toPlaceholder {0; 1} - Returns value to the placeholder. Default: 0.
  * @param $placeholderName {string} - Placeholder name. Default: 'ddParent'.
  * 
- * @link http://code.divandesign.biz/modx/ddgetparentid/1.0
+ * @link http://code.divandesign.biz/modx/ddgetparentid/1.0.1
  * 
- * @copyright 2011, DivanDesign
+ * @copyright 2013, DivanDesign
  * http://www.DivanDesign.biz
  */
 
@@ -26,7 +26,13 @@ $placeholderName = isset($placeholderName) ? $placeholderName : 'ddParent';
 if ($level == 'ultimate'){$level = 10;}
 
 //Получаем последнего родителя
-$parent = array_pop($modx->getParentIds($id, $level));
+$parent = $modx->getParentIds($id, $level);
+
+if (count($parent) > 0){
+	$parent = array_pop($parent);
+}else{
+	$parent = $id;
+}
 
 //Если задан шаблон, выводим по шаблону
 if (isset($tpl)){$parent = $modx->parseChunk($tpl, array('id' => $parent),'[+','+]');}
