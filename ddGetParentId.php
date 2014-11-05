@@ -1,19 +1,19 @@
 ﻿<?php
 /**
  * ddGetParentId.php
- * @version 1.0.1 (2013-08-10)
+ * @version 1.1 (2014-11-05)
  * 
  * @desc Gets the parent ID of the required level.
  * 
  * @param $id {integer} - Document Id. Default: [*id*].
  * @param $level {integer} - Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
- * @param $tpl {string} - Template (chunk name) for output. Available placeholders: [+id+]. Default: —.
+ * @param $tpl {string: chunkName} - Template (chunk name) for output. Available placeholders: [+id+]. Default: —.
  * @param $toPlaceholder {0; 1} - Returns value to the placeholder. Default: 0.
  * @param $placeholderName {string} - Placeholder name. Default: 'ddParent'.
  * 
- * @link http://code.divandesign.biz/modx/ddgetparentid/1.0.1
+ * @link http://code.divandesign.biz/modx/ddgetparentid/1.1
  * 
- * @copyright 2013, DivanDesign
+ * @copyright 2014, DivanDesign
  * http://www.DivanDesign.biz
  */
 
@@ -51,7 +51,7 @@ if ($parent_len > 0){
 }
 
 //Если задан шаблон, выводим по шаблону
-if (isset($tpl)){$parent = $modx->parseChunk($tpl, array('id' => $parent),'[+','+]');}
+if (isset($tpl)){$parent = $modx->parseChunk($tpl, array('id' => $parent), '[+', '+]');}
 
 //Если надо, выводим в плэйсхолдер, или просто возвращаем
 if ($toPlaceholder){
