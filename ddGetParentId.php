@@ -6,7 +6,7 @@
  * @desc Gets the parent ID of the required level.
  * 
  * @param $id {integer} - Document Id. Default: [*id*].
- * @param $level {integer; string} - Parent level (1 — the immediate parent, 'ultimate' — the last). Default: 1.
+ * @param $level {integer} - Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
  * @param $tpl {string} - Template (chunk name) for output. Available placeholders: [+id+]. Default: —.
  * @param $toPlaceholder {0; 1} - Returns value to the placeholder. Default: 0.
  * @param $placeholderName {string} - Placeholder name. Default: 'ddParent'.
@@ -18,18 +18,34 @@
  */
 
 $id = isset($id) ? $id : $modx->documentIdentifier;
-$level = isset($level) ? $level : 1;
 $toPlaceholder = (isset($toPlaceholder) && $toPlaceholder == '1') ? true : false;
 $placeholderName = isset($placeholderName) ? $placeholderName : 'ddParent';
 
-//Если нужно получить самый последний, задаём глубину 10
-if ($level == 'ultimate'){$level = 10;}
+if (!isset($level)){
+	$level = 1;
+}else{
+	//For backward compatibility
+	if ($level == 'ultimate'){
+		$level = -1;
+	}else{
+		$level = (int) $level;
+	}
+}
 
-//Получаем последнего родителя
-$parent = $modx->getParentIds($id, $level);
+//Получаем всех родителей (на самом деле максимум 10, но да ладно)
+$parent = $modx->getParentIds($id);
+$parent_len = count($parent);
 
-if (count($parent) > 0){
-	$parent = array_pop($parent);
+//Если родители вообще есть
+if ($parent_len > 0){
+	//Если уровень задали больше, чем в принципе есть родителей, считаем, что нужен последний
+	if ($level > $parent_len){$level = -1;}
+	//Если уровень задаётся от начала (не от конца), то его надо бы декриминировать (т.к. самого себя в массиве $parent не будет)
+	if ($level > 0){$level--;}
+	
+	//Получаем необходимого родителя
+	$parent = array_slice($parent, $level, 1);
+	$parent = $parent[0];
 }else{
 	$parent = $id;
 }
