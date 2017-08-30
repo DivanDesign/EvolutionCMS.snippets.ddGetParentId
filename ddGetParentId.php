@@ -18,6 +18,8 @@
  * @copyright 2011–2014 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
+$result = '';
+
 $id = isset($id) ? $id : $modx->documentIdentifier;
 $toPlaceholder = (isset($toPlaceholder) && $toPlaceholder == '1') ? true : false;
 $placeholderName = isset($placeholderName) ? $placeholderName : 'ddParent';
@@ -34,28 +36,28 @@ if (!isset($level)){
 }
 
 //Получаем всех родителей (на самом деле максимум 10, но да ладно)
-$parent = $modx->getParentIds($id);
-$parent_len = count($parent);
+$parents = $modx->getParentIds($id);
+$parents_len = count($parents);
 
 //Если родители вообще есть
-if ($parent_len > 0){
+if ($parents_len > 0){
 	//Если уровень задали больше, чем в принципе есть родителей, считаем, что нужен последний
-	if ($level > $parent_len){$level = -1;}
-	//Если уровень задаётся от начала (не от конца), то его надо бы декриминировать (т.к. самого себя в массиве $parent не будет)
+	if ($level > $parents_len){$level = -1;}
+	//Если уровень задаётся от начала (не от конца), то его надо бы декриминировать (т.к. самого себя в массиве $parents не будет)
 	if ($level > 0){$level--;}
 	
 	//Получаем необходимого родителя
-	$parent = array_slice($parent, $level, 1);
-	$parent = $parent[0];
+	$parents = array_slice($parents, $level, 1);
+	$result = $parents[0];
 }else{
-	$parent = $id;
+	$result = $id;
 }
 
 //Если задан шаблон, выводим по шаблону
 if (isset($tpl)){
-	$parent = $modx->parseChunk(
+	$result = $modx->parseChunk(
 		$tpl,
-		['id' => $parent],
+		['id' => $result],
 		'[+',
 		'+]'
 	);
@@ -63,8 +65,9 @@ if (isset($tpl)){
 
 //Если надо, выводим в плэйсхолдер, или просто возвращаем
 if ($toPlaceholder){
-	$modx->setPlaceholder($placeholderName, $parent);
-}else{
-	return $parent;
+	$modx->setPlaceholder($placeholderName, $result);
+	$result = '';
 }
+
+return $result;
 ?>
