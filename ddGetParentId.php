@@ -5,6 +5,8 @@
  * 
  * @desc Gets the parent ID of the required level.
  * 
+ * @uses PHP >= 5.4.
+ * 
  * @param $id {integer} — Document Id. Default: [*id*].
  * @param $level {integer} — Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
  * @param $tpl {string_chunkName} — Template (chunk name) for output. Available placeholders: [+id+]. Default: —.
@@ -53,7 +55,7 @@ if ($parent_len > 0){
 if (isset($tpl)){
 	$parent = $modx->parseChunk(
 		$tpl,
-		array('id' => $parent),
+		['id' => $parent],
 		'[+',
 		'+]'
 	);
