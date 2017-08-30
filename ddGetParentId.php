@@ -1,9 +1,9 @@
 ﻿<?php
 /**
  * ddGetParentId
- * @version 1.1 (2014-11-05)
+ * @version 1.2 (2017-08-30)
  * 
- * @desc Gets the parent ID of the required level.
+ * @desc Gets the parent ID(s) of the required level.
  * 
  * @uses PHP >= 5.4.
  * @uses MODXEvo >= 1.1.
@@ -17,9 +17,9 @@
  * @param $result_toPlaceholder {0|1} — Returns value to the placeholder. Default: 0.
  * @param $result_toPlaceholder_name {string} — Placeholder name. Default: 'ddParent'.
  * 
- * @link http://code.divandesign.biz/modx/ddgetparentid/1.1
+ * @link http://code.divandesign.biz/modx/ddgetparentid/1.2
  * 
- * @copyright 2011–2014 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2011–2017 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
@@ -67,7 +67,7 @@ if ($parents_len > 0){
 		$result_itemsNumber = intval($parent_len);
 	}
 	
-	//Получаем необходимого родителя
+	//Получаем необходимых родителей
 	$parents = array_slice($parents, $level, $result_itemsNumber);
 	$parents = array_reverse($parents);
 }else{
@@ -83,7 +83,7 @@ foreach ($parents as $parentIndex => $parentId){
 
 $result = implode($result_itemsGlue, $parents);
 
-//Если надо, выводим в плэйсхолдер, или просто возвращаем
+//Если надо, выводим в плэйсхолдер
 if ($result_toPlaceholder){
 	$modx->setPlaceholder($result_toPlaceholder_name, $result);
 	$result = '';
