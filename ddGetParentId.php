@@ -62,9 +62,9 @@ if ($parents_len > 0){
 	if ($level > 0){$level--;}
 	//Количество возвращаемых родителей
 	if ($result_itemsNumber == 'all'){
-		$result_itemsNumber = $parent_len;
+		$result_itemsNumber = $parents_len;
 	}else{
-		$result_itemsNumber = intval($parent_len);
+		$result_itemsNumber = intval($parents_len);
 	}
 	
 	//Получаем необходимых родителей
