@@ -6,8 +6,8 @@
  * @desc Gets the parent ID(s) of the required level.
  * 
  * @uses PHP >= 5.4.
- * @uses (MODX)EvolutionCMS >= 1.1.
- * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.20.
+ * @uses (MODX)EvolutionCMS >= 1.1 {@link https://github.com/evolution-cms/evolution }.
+ * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.20 {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @param $id {integer} — Document Id. Default: [*id*].
  * @param $level {integer} — Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
