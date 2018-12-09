@@ -1,7 +1,7 @@
-﻿<?php
+﻿﻿<?php
 /**
  * ddGetParentId
- * @version 1.2 (2017-08-30)
+ * @version 1.2.1 (2018-12-09)
  * 
  * @desc Gets the parent ID(s) of the required level.
  * 
@@ -17,9 +17,9 @@
  * @param $result_toPlaceholder {0|1} — Returns value to the placeholder. Default: 0.
  * @param $result_toPlaceholder_name {string} — Placeholder name. Default: 'ddParent'.
  * 
- * @link http://code.divandesign.biz/modx/ddgetparentid/1.2
+ * @link http://code.divandesign.biz/modx/ddgetparentid/1.2.1
  * 
- * @copyright 2011–2017 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2011–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
