@@ -1,13 +1,13 @@
-﻿<?php
+﻿﻿<?php
 /**
  * ddGetParentId
- * @version 1.2 (2017-08-30)
+ * @version 1.2.1 (2018-12-09)
  * 
  * @desc Gets the parent ID(s) of the required level.
  * 
  * @uses PHP >= 5.4.
- * @uses MODXEvo >= 1.1.
- * @uses MODXEvo.library.ddTools >= 0.20.
+ * @uses (MODX)EvolutionCMS >= 1.1 {@link https://github.com/evolution-cms/evolution }.
+ * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.20 {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @param $id {integer} — Document Id. Default: [*id*].
  * @param $level {integer} — Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
@@ -17,26 +17,33 @@
  * @param $result_toPlaceholder {0|1} — Returns value to the placeholder. Default: 0.
  * @param $result_toPlaceholder_name {string} — Placeholder name. Default: 'ddParent'.
  * 
- * @link http://code.divandesign.biz/modx/ddgetparentid/1.2
+ * @link http://code.divandesign.biz/modx/ddgetparentid/1.2.1
  * 
- * @copyright 2011–2017 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2011–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $result = '';
 
+//Include (MODX)EvolutionCMS.libraries.ddTools
 require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
 
 //Bacward compatibility
-extract(ddTools::verifyRenamedParams($params, [
-	'result_itemTpl' => 'tpl',
-	'result_toPlaceholder' => 'toPlaceholder',
-	'result_toPlaceholder_name' => 'placeholderName',
-]));
+extract(ddTools::verifyRenamedParams(
+	$params,
+	[
+		'result_itemTpl' => 'tpl',
+		'result_toPlaceholder' => 'toPlaceholder',
+		'result_toPlaceholder_name' => 'placeholderName',
+	]
+));
 
 $id = isset($id) ? $id : $modx->documentIdentifier;
 $result_itemTpl = isset($result_itemTpl) ? $modx->getTpl($result_itemTpl) : '[+id+]';
 $result_itemsGlue = isset($result_itemsGlue) ? $result_itemsGlue : '';
-$result_toPlaceholder = (isset($result_toPlaceholder) && $result_toPlaceholder == '1') ? true : false;
+$result_toPlaceholder = (
+	isset($result_toPlaceholder) &&
+	$result_toPlaceholder == '1'
+) ? true : false;
 $result_toPlaceholder_name = isset($result_toPlaceholder_name) ? $result_toPlaceholder_name : 'ddParent';
 
 if (!isset($level)){
@@ -62,30 +69,46 @@ if ($parents_len > 0){
 	if ($level > 0){$level--;}
 	//Количество возвращаемых родителей
 	if ($result_itemsNumber == 'all'){
-		$result_itemsNumber = $parent_len;
+		$result_itemsNumber = $parents_len;
 	}else{
-		$result_itemsNumber = intval($parent_len);
+		$result_itemsNumber = intval($parents_len);
 	}
 	
 	//Получаем необходимых родителей
-	$parents = array_slice($parents, $level, $result_itemsNumber);
+	$parents = array_slice(
+		$parents,
+		$level,
+		$result_itemsNumber
+	);
 	$parents = array_reverse($parents);
 }else{
 	$parents = [$id];
 }
 
-foreach ($parents as $parentIndex => $parentId){
+foreach (
+	$parents as
+	$parentIndex => $parentId
+){
 	$parents[$parentIndex] = ddTools::parseText([
 		'text' => $result_itemTpl,
-		'data' => ['id' => $parentId]
+		'data' => [
+			'id' => $parentId
+		]
 	]);
 }
 
-$result = implode($result_itemsGlue, $parents);
+$result = implode(
+	$result_itemsGlue,
+	$parents
+);
 
 //Если надо, выводим в плэйсхолдер
 if ($result_toPlaceholder){
-	$modx->setPlaceholder($result_toPlaceholder_name, $result);
+	$modx->setPlaceholder(
+		$result_toPlaceholder_name,
+		$result
+	);
+	
 	$result = '';
 }
 
