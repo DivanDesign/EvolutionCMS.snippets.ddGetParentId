@@ -6,8 +6,8 @@
  * @desc Gets the parent ID(s) of the required level.
  * 
  * @uses PHP >= 5.4.
- * @uses MODXEvo >= 1.1.
- * @uses MODXEvo.library.ddTools >= 0.20.
+ * @uses (MODX)EvolutionCMS >= 1.1.
+ * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.20.
  * 
  * @param $id {integer} — Document Id. Default: [*id*].
  * @param $level {integer} — Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
@@ -24,19 +24,26 @@
 
 $result = '';
 
+//Include (MODX)EvolutionCMS.libraries.ddTools
 require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
 
 //Bacward compatibility
-extract(ddTools::verifyRenamedParams($params, [
-	'result_itemTpl' => 'tpl',
-	'result_toPlaceholder' => 'toPlaceholder',
-	'result_toPlaceholder_name' => 'placeholderName',
-]));
+extract(ddTools::verifyRenamedParams(
+	$params,
+	[
+		'result_itemTpl' => 'tpl',
+		'result_toPlaceholder' => 'toPlaceholder',
+		'result_toPlaceholder_name' => 'placeholderName',
+	]
+));
 
 $id = isset($id) ? $id : $modx->documentIdentifier;
 $result_itemTpl = isset($result_itemTpl) ? $modx->getTpl($result_itemTpl) : '[+id+]';
 $result_itemsGlue = isset($result_itemsGlue) ? $result_itemsGlue : '';
-$result_toPlaceholder = (isset($result_toPlaceholder) && $result_toPlaceholder == '1') ? true : false;
+$result_toPlaceholder = (
+	isset($result_toPlaceholder) &&
+	$result_toPlaceholder == '1'
+) ? true : false;
 $result_toPlaceholder_name = isset($result_toPlaceholder_name) ? $result_toPlaceholder_name : 'ddParent';
 
 if (!isset($level)){
@@ -68,24 +75,40 @@ if ($parents_len > 0){
 	}
 	
 	//Получаем необходимых родителей
-	$parents = array_slice($parents, $level, $result_itemsNumber);
+	$parents = array_slice(
+		$parents,
+		$level,
+		$result_itemsNumber
+	);
 	$parents = array_reverse($parents);
 }else{
 	$parents = [$id];
 }
 
-foreach ($parents as $parentIndex => $parentId){
+foreach (
+	$parents as
+	$parentIndex => $parentId
+){
 	$parents[$parentIndex] = ddTools::parseText([
 		'text' => $result_itemTpl,
-		'data' => ['id' => $parentId]
+		'data' => [
+			'id' => $parentId
+		]
 	]);
 }
 
-$result = implode($result_itemsGlue, $parents);
+$result = implode(
+	$result_itemsGlue,
+	$parents
+);
 
 //Если надо, выводим в плэйсхолдер
 if ($result_toPlaceholder){
-	$modx->setPlaceholder($result_toPlaceholder_name, $result);
+	$modx->setPlaceholder(
+		$result_toPlaceholder_name,
+		$result
+	);
+	
 	$result = '';
 }
 
