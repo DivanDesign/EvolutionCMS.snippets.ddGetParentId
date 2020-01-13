@@ -68,10 +68,12 @@ if ($parents_len > 0){
 	//Если уровень задаётся от начала (не от конца), то его надо бы декриминировать (т.к. самого себя в массиве $parents не будет)
 	if ($level > 0){$level--;}
 	//Количество возвращаемых родителей
-	if ($result_itemsNumber == 'all'){
+	if ($result_itemsNumber == 'all'){ //Все родители
 		$result_itemsNumber = $parents_len;
+	}else if (isset($result_itemsNumber)){
+		$result_itemsNumber = intval($result_itemsNumber);
 	}else{
-		$result_itemsNumber = intval($parents_len);
+		$result_itemsNumber = 1;
 	}
 	
 	//Получаем необходимых родителей
