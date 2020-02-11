@@ -3,21 +3,9 @@
  * ddGetParentId
  * @version 1.2.1 (2018-12-09)
  * 
- * @desc Gets the parent ID(s) of the required level.
+ * @see README.md
  * 
- * @uses PHP >= 5.4.
- * @uses (MODX)EvolutionCMS >= 1.1 {@link https://github.com/evolution-cms/evolution }.
- * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.30 {@link http://code.divandesign.biz/modx/ddtools }.
- * 
- * @param $id {integer} — Document Id. Default: [*id*].
- * @param $level {integer} — Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
- * @param $result_itemTpl {stringChunkName|string} — Template for output (chunk name or code via “@CODE:” prefix). Available placeholders: [+id+]. Default: '@CODE:[+id+]'.
- * @param $result_itemsNumber {integer|'all'} — The number of parents that will be returned. Default: 1.
- * @param $result_itemsGlue {string} — The string that combines items while rendering. Default: ''.
- * @param $result_toPlaceholder {0|1} — Returns value to the placeholder. Default: 0.
- * @param $result_toPlaceholder_name {string} — Placeholder name. Default: 'ddParent'.
- * 
- * @link http://code.divandesign.biz/modx/ddgetparentid/1.2.1
+ * @link http://code.divandesign.biz/modx/ddgetparentid
  * 
  * @copyright 2011–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
