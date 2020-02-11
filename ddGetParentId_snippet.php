@@ -1,34 +1,26 @@
-﻿﻿<?php
+<?php
 /**
  * ddGetParentId
- * @version 1.2.1 (2018-12-09)
+ * @version 1.2.2 (2020-02-11)
  * 
- * @desc Gets the parent ID(s) of the required level.
+ * @see README.md
  * 
- * @uses PHP >= 5.4.
- * @uses (MODX)EvolutionCMS >= 1.1 {@link https://github.com/evolution-cms/evolution }.
- * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.20 {@link http://code.divandesign.biz/modx/ddtools }.
+ * @link http://code.divandesign.biz/modx/ddgetparentid
  * 
- * @param $id {integer} — Document Id. Default: [*id*].
- * @param $level {integer} — Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
- * @param $result_itemTpl {string_chunkName|string} — Template for output (chunk name or code via “@CODE:” prefix). Available placeholders: [+id+]. Default: '@CODE:[+id+]'.
- * @param $result_itemsNumber {integer|'all'} — The number of parents that will be returned. Default: 1.
- * @param $result_itemsGlue {string} — The string that combines items while rendering. Default: ''.
- * @param $result_toPlaceholder {0|1} — Returns value to the placeholder. Default: 0.
- * @param $result_toPlaceholder_name {string} — Placeholder name. Default: 'ddParent'.
- * 
- * @link http://code.divandesign.biz/modx/ddgetparentid/1.2.1
- * 
- * @copyright 2011–2018 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2011–2020 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-$result = '';
-
 //Include (MODX)EvolutionCMS.libraries.ddTools
-require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddTools/modx.ddtools.class.php'
+);
+
+//The snippet must return an empty string even if result is absent
+$snippetResult = '';
 
 //Bacward compatibility
-extract(ddTools::verifyRenamedParams(
+extract(\ddTools::verifyRenamedParams(
 	$params,
 	[
 		'result_itemTpl' => 'tpl',
@@ -37,14 +29,39 @@ extract(ddTools::verifyRenamedParams(
 	]
 ));
 
-$id = isset($id) ? $id : $modx->documentIdentifier;
-$result_itemTpl = isset($result_itemTpl) ? $modx->getTpl($result_itemTpl) : '[+id+]';
-$result_itemsGlue = isset($result_itemsGlue) ? $result_itemsGlue : '';
-$result_toPlaceholder = (
-	isset($result_toPlaceholder) &&
-	$result_toPlaceholder == '1'
-) ? true : false;
-$result_toPlaceholder_name = isset($result_toPlaceholder_name) ? $result_toPlaceholder_name : 'ddParent';
+$id =
+	isset($id) ?
+	$id :
+	$modx->documentIdentifier
+;
+$result_itemsNumber =
+	isset($result_itemsNumber) ?
+	$result_itemsNumber :
+	1
+;
+$result_itemTpl =
+	isset($result_itemTpl) ?
+	$modx->getTpl($result_itemTpl) :
+	'[+id+]'
+;
+$result_itemsGlue =
+	isset($result_itemsGlue) ?
+	$result_itemsGlue :
+	''
+;
+$result_toPlaceholder =
+	(
+		isset($result_toPlaceholder) &&
+		$result_toPlaceholder == '1'
+	) ?
+	true :
+	false
+;
+$result_toPlaceholder_name =
+	isset($result_toPlaceholder_name) ?
+	$result_toPlaceholder_name :
+	'ddParent'
+;
 
 if (!isset($level)){
 	$level = 1;
@@ -53,43 +70,22 @@ if (!isset($level)){
 	if ($level == 'ultimate'){
 		$level = -1;
 	}else{
-		$level = (int) $level;
+		$level = intval($level);
 	}
 }
 
-//Получаем всех родителей (на самом деле максимум 10, но да ладно)
-$parents = $modx->getParentIds($id);
-$parents_len = count($parents);
-
-//Если родители вообще есть
-if ($parents_len > 0){
-	//Если уровень задали больше, чем в принципе есть родителей, считаем, что нужен последний
-	if ($level > $parents_len){$level = -1;}
-	//Если уровень задаётся от начала (не от конца), то его надо бы декриминировать (т.к. самого себя в массиве $parents не будет)
-	if ($level > 0){$level--;}
-	//Количество возвращаемых родителей
-	if ($result_itemsNumber == 'all'){
-		$result_itemsNumber = $parents_len;
-	}else{
-		$result_itemsNumber = intval($parents_len);
-	}
-	
-	//Получаем необходимых родителей
-	$parents = array_slice(
-		$parents,
-		$level,
-		$result_itemsNumber
-	);
-	$parents = array_reverse($parents);
-}else{
-	$parents = [$id];
-}
+$parents = \ddTools::getDocumentParentIds([
+	'docId' => $id,
+	'level' => $level,
+	'totalResults' => $result_itemsNumber
+]);
 
 foreach (
 	$parents as
-	$parentIndex => $parentId
+	$parentIndex =>
+	$parentId
 ){
-	$parents[$parentIndex] = ddTools::parseText([
+	$parents[$parentIndex] = \ddTools::parseText([
 		'text' => $result_itemTpl,
 		'data' => [
 			'id' => $parentId
@@ -97,7 +93,7 @@ foreach (
 	]);
 }
 
-$result = implode(
+$snippetResult = implode(
 	$result_itemsGlue,
 	$parents
 );
@@ -106,11 +102,11 @@ $result = implode(
 if ($result_toPlaceholder){
 	$modx->setPlaceholder(
 		$result_toPlaceholder_name,
-		$result
+		$snippetResult
 	);
 	
-	$result = '';
+	$snippetResult = '';
 }
 
-return $result;
+return $snippetResult;
 ?>
