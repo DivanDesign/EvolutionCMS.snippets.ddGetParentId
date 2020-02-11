@@ -16,7 +16,7 @@ Gets document parent ID(s) of the required level.
 Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddGetParentId`.
-2. Description: `<b>1.2.1</b> Gets document parent ID(s) of the required level.`.
+2. Description: `<b>1.2.2</b> Gets document parent ID(s) of the required level.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddGetParentId_snippet.php` file from the archive.
