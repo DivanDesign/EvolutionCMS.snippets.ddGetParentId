@@ -7,7 +7,7 @@
  * 
  * @uses PHP >= 5.4.
  * @uses (MODX)EvolutionCMS >= 1.1 {@link https://github.com/evolution-cms/evolution }.
- * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.20 {@link http://code.divandesign.biz/modx/ddtools }.
+ * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.30 {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @param $id {integer} — Document Id. Default: [*id*].
  * @param $level {integer} — Parent level (1 — the immediate parent; 2 — the parent of the immediate parent; -1 — the last parent; -2 — the parent before the last; etc). Default: 1.
@@ -46,6 +46,11 @@ $id =
 	$id :
 	$modx->documentIdentifier
 ;
+$result_itemsNumber =
+	isset($result_itemsNumber) ?
+	$result_itemsNumber :
+	1
+;
 $result_itemTpl =
 	isset($result_itemTpl) ?
 	$modx->getTpl($result_itemTpl) :
@@ -81,42 +86,11 @@ if (!isset($level)){
 	}
 }
 
-//Получаем всех родителей (на самом деле максимум 10, но да ладно)
-$parents = $modx->getParentIds($id);
-$parents_len = count($parents);
-
-//Если родители вообще есть
-if ($parents_len > 0){
-	//Если уровень задали больше, чем в принципе есть родителей, считаем, что нужен последний
-	if ($level > $parents_len){
-		$level = -1;
-	}
-	//Если уровень задаётся от начала (не от конца), то его надо бы декриминировать (т.к. самого себя в массиве $parents не будет)
-	if ($level > 0){
-		$level--;
-	}
-	//Количество возвращаемых родителей
-	if ($result_itemsNumber == 'all'){
-		//Все родители
-		$result_itemsNumber = $parents_len;
-	}else if (isset($result_itemsNumber)){
-		//Заданное количество
-		$result_itemsNumber = intval($result_itemsNumber);
-	}else{
-		//Непосредственный
-		$result_itemsNumber = 1;
-	}
-	
-	//Получаем необходимых родителей
-	$parents = array_slice(
-		$parents,
-		$level,
-		$result_itemsNumber
-	);
-	$parents = array_reverse($parents);
-}else{
-	$parents = [$id];
-}
+$parents = \ddTools::getDocumentParentIds([
+	'docId' => $id,
+	'level' => $level,
+	'totalResults' => $result_itemsNumber
+]);
 
 foreach (
 	$parents as
