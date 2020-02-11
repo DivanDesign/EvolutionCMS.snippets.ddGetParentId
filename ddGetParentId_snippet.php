@@ -22,16 +22,17 @@
  * @copyright 2011–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-$result = '';
-
 //Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
 	$modx->getConfig('base_path') .
 	'assets/libs/ddTools/modx.ddtools.class.php'
 );
 
+//The snippet must return an empty string even if result is absent
+$snippetResult = '';
+
 //Bacward compatibility
-extract(ddTools::verifyRenamedParams(
+extract(\ddTools::verifyRenamedParams(
 	$params,
 	[
 		'result_itemTpl' => 'tpl',
@@ -122,7 +123,7 @@ foreach (
 	$parentIndex =>
 	$parentId
 ){
-	$parents[$parentIndex] = ddTools::parseText([
+	$parents[$parentIndex] = \ddTools::parseText([
 		'text' => $result_itemTpl,
 		'data' => [
 			'id' => $parentId
@@ -130,7 +131,7 @@ foreach (
 	]);
 }
 
-$result = implode(
+$snippetResult = implode(
 	$result_itemsGlue,
 	$parents
 );
@@ -139,11 +140,11 @@ $result = implode(
 if ($result_toPlaceholder){
 	$modx->setPlaceholder(
 		$result_toPlaceholder_name,
-		$result
+		$snippetResult
 	);
 	
-	$result = '';
+	$snippetResult = '';
 }
 
-return $result;
+return $snippetResult;
 ?>
