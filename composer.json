@@ -11,5 +11,9 @@
 		"evo cms",
 		"evolution cms",
 		"ddgetparentid"
-	]
+	],
+	"require": {
+		"php": ">=5.4.0",
+		"dd/modxevo-library-ddtools": ">=0.30"
+	}
 }
