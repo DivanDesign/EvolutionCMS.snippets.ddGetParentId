@@ -1,7 +1,7 @@
 <?php
 /**
  * ddGetParentId
- * @version 1.2.2 (2020-02-11)
+ * @version 1.3 (2020-03-02)
  * 
  * @see README.md
  * 
