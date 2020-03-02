@@ -1,6 +1,11 @@
 # (MODX)EvolutionCMS.snippets.ddGetParentId changelog
 
 
+## Version 1.3 (2020-03-02)
+* \+ Empty items after parsing `result_itemTpl` will be ignored (you can calling third-party snippets in the template and set your own display conditions).
+* \+ Composer.json → Require.
+
+
 ## Version 1.2.2 (2020-02-11)
 * \* Attention! (MODX)EvolutionCMS.libraries.ddTools >= 0.30 is required.
 * \* Fixed a bug where `result_itemsNumber` was always equal to `'all'`.

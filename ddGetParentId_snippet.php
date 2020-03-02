@@ -1,7 +1,7 @@
 <?php
 /**
  * ddGetParentId
- * @version 1.2.2 (2020-02-11)
+ * @version 1.3 (2020-03-02)
  * 
  * @see README.md
  * 
@@ -85,12 +85,18 @@ foreach (
 	$parentIndex =>
 	$parentId
 ){
+	//Parse item
 	$parents[$parentIndex] = \ddTools::parseText([
 		'text' => $result_itemTpl,
 		'data' => [
 			'id' => $parentId
 		]
 	]);
+	
+	//Remove empty items
+	if (empty($parents[$parentIndex])){
+		unset($parents[$parentIndex]);
+	}
 }
 
 $snippetResult = implode(
