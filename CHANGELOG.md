@@ -1,6 +1,18 @@
 # (MODX)EvolutionCMS.snippets.ddGetParentId changelog
 
 
+## Version 1.3.1 (2020-06-22)
+* \* Attention! (MODX)EvolutionCMS.libraries.ddTools >= 0.40.1 is required (not tested in older versions).
+* \* Compatibility with new versions of (MODX)EvolutionCMS.libraries.ddTools.
+* \* README, CHANGELOG: Style changes.
+* \* README:
+	* \- Home.
+	* \+ Links.
+* \* Composer.json → `require` → `dd/evolutioncms-libraries-ddtools`:
+	* \* Renamed from `dd/modxevo-library-ddtools`.
+	* \* Version format fixed.
+
+
 ## Version 1.3 (2020-03-02)
 * \+ Empty items after parsing `result_itemTpl` will be ignored (you can calling third-party snippets in the template and set your own display conditions).
 * \+ Composer.json → Require.
@@ -16,4 +28,5 @@
 * \+ The first release.
 
 
+<link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />
 <style>ul{list-style:none;}</style>

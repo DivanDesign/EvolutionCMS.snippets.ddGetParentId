@@ -1,14 +1,16 @@
 <?php
 /**
  * ddGetParentId
- * @version 1.3 (2020-03-02)
+ * @version 1.3.1 (2020-06-22)
  * 
  * @see README.md
  * 
- * @link http://code.divandesign.biz/modx/ddgetparentid
+ * @link https://code.divandesign.biz/modx/ddgetparentid
  * 
- * @copyright 2011–2020 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2011–2020 DD Group {@link https://DivanDesign.biz }
  */
+
+global $modx;
 
 //Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
@@ -20,14 +22,14 @@ require_once(
 $snippetResult = '';
 
 //Bacward compatibility
-extract(\ddTools::verifyRenamedParams(
-	$params,
-	[
+extract(\ddTools::verifyRenamedParams([
+	'params' => $params,
+	'compliance' => [
 		'result_itemTpl' => 'tpl',
 		'result_toPlaceholder' => 'toPlaceholder',
 		'result_toPlaceholder_name' => 'placeholderName',
 	]
-));
+]));
 
 $id =
 	isset($id) ?
