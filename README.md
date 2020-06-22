@@ -13,6 +13,7 @@ Gets document parent ID(s) of the required level.
 
 
 ### Installation
+
 Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddGetParentId`.
@@ -28,6 +29,7 @@ Elements → Snippets: Create a new snippet with the following data
 	* Desctription: Document Id.
 	* Valid values: `integer`
 	* Default value: `[*id*]` (current document)
+	
 * `level`
 	* Desctription: Parent level
 		* `1` — the immediate parent
@@ -37,12 +39,14 @@ Elements → Snippets: Create a new snippet with the following data
 		* etc.
 	* Valid values: `integer`
 	* Default value: `1`
+	
 * `result_itemsNumber`
 	* Desctription: The number of parents that will be returned.
 	* Valid values:
 		* `integer`
 		* `'all'`
 	* Default value: `1`
+	
 * `result_itemTpl`
 	* Desctription: Template for output.  
 		Empty items after parsing the template will be ignored (you can calling third-party snippets in the template and set your own display conditions).  
@@ -52,16 +56,19 @@ Elements → Snippets: Create a new snippet with the following data
 		* `string_chunkName`
 		* `string` — use inline templates starting with `@CODE:`
 	* Default value: `'@CODE:[+id+]'`
+	
 * `result_itemsGlue`
 	* Desctription: The string that combines items while rendering.
 	* Valid values: `string`
 	* Default value: `''`
+	
 * `result_toPlaceholder`
 	* Desctription: Returns value to the placeholder.
 	* Valid values:
 		* `0`
 		* `1`
 	* Default value: `0`
+	
 * `result_toPlaceholder_name`
 	* Desctription: Placeholder name.
 	* Valid values: `string`
@@ -69,3 +76,6 @@ Elements → Snippets: Create a new snippet with the following data
 
 
 ## [Home page →](http://code.divandesign.biz/modx/ddgetparentid)
+
+
+<link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />
