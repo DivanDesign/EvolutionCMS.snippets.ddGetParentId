@@ -20,14 +20,14 @@ require_once(
 $snippetResult = '';
 
 //Bacward compatibility
-extract(\ddTools::verifyRenamedParams(
-	$params,
-	[
+extract(\ddTools::verifyRenamedParams([
+	'params' => $params,
+	'compliance' => [
 		'result_itemTpl' => 'tpl',
 		'result_toPlaceholder' => 'toPlaceholder',
 		'result_toPlaceholder_name' => 'placeholderName',
 	]
-));
+]));
 
 $id =
 	isset($id) ?
