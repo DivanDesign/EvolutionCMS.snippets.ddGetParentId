@@ -5,10 +5,12 @@
  * 
  * @see README.md
  * 
- * @link http://code.divandesign.biz/modx/ddgetparentid
+ * @link https://code.divandesign.biz/modx/ddgetparentid
  * 
- * @copyright 2011–2020 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2011–2020 DD Group {@link https://DivanDesign.biz }
  */
+
+global $modx;
 
 //Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
