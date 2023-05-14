@@ -43,7 +43,7 @@ $result_itemsNumber =
 ;
 $result_itemTpl =
 	isset($result_itemTpl) ?
-	$modx->getTpl($result_itemTpl) :
+	\ddTools::getTpl($result_itemTpl) :
 	'[+id+]'
 ;
 $result_itemsGlue =
