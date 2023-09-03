@@ -1,13 +1,13 @@
 <?php
 /**
  * ddGetParentId
- * @version 1.3.1 (2020-06-22)
+ * @version 1.4 (2023-09-04)
  * 
  * @see README.md
  * 
  * @link https://code.divandesign.ru/modx/ddgetparentid
  * 
- * @copyright 2011–2020 Ronef {@link https://Ronef.ru }
+ * @copyright 2011–2023 Ronef {@link https://Ronef.ru }
  */
 
 //Include (MODX)EvolutionCMS.libraries.ddTools

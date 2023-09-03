@@ -1,6 +1,13 @@
 # (MODX)EvolutionCMS.snippets.ddGetParentId changelog
 
 
+## Версия 1.4 (2023-09-04)
+* \+ Запустить сниппет без DB и eval можно через `\DDTools\Snippet::runSnippet` (см. README → Примеры).
+* \+ README → Установка → Используя (MODX)EvolutionCMS.libraries.ddInstaller.
+* \+ README_ru, CHANGELOG_ru.
+* \* Внимание! Требуется (MODX)EvolutionCMS.libraries.ddTools >= 0.60.
+
+
 ## Версия 1.3.1 (2020-06-22)
 * \* Внимание! Требуется (MODX)EvolutionCMS.libraries.ddTools >= 0.40.1 (не тестировался с более ранними версиями).
 * \* Совместимость с новыми версиями (MODX)EvolutionCMS.libraries.ddTools.

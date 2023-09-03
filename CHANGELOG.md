@@ -1,6 +1,13 @@
 # (MODX)EvolutionCMS.snippets.ddGetParentId changelog
 
 
+## Version 1.4 (2023-09-04)
+* \+ You can just call `\DDTools\Snippet::runSnippet` to run the snippet without DB and eval (see README → Examples).
+* \+ README → Installation → Using (MODX)EvolutionCMS.libraries.ddInstaller.
+* \+ README_ru, CHANGELOG_ru.
+* \* Attention! (MODX)EvolutionCMS.libraries.ddTools >= 0.60 is required.
+
+
 ## Version 1.3.1 (2020-06-22)
 * \* Attention! (MODX)EvolutionCMS.libraries.ddTools >= 0.40.1 is required (not tested in older versions).
 * \* Compatibility with new versions of (MODX)EvolutionCMS.libraries.ddTools.

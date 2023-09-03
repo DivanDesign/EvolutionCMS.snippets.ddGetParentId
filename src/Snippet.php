@@ -3,7 +3,7 @@ namespace ddGetParentId;
 
 class Snippet extends \DDTools\Snippet {
 	protected
-		$version = '1.3.1',
+		$version = '1.4.0',
 		
 		$params = [
 			//Defaults
