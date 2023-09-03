@@ -12,14 +12,15 @@
 
 global $modx;
 
+//# Include
 //Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
 	$modx->getConfig('base_path') .
 	'assets/libs/ddTools/modx.ddtools.class.php'
 );
 
-//The snippet must return an empty string even if result is absent
-$snippetResult = '';
+
+//# Prepare params
 
 //Bacward compatibility
 extract(\ddTools::verifyRenamedParams([
@@ -31,55 +32,43 @@ extract(\ddTools::verifyRenamedParams([
 	]
 ]));
 
-$id =
-	isset($id) ?
-	$id :
-	$modx->documentIdentifier
-;
-$result_itemsNumber =
-	isset($result_itemsNumber) ?
-	$result_itemsNumber :
-	1
-;
-$result_itemTpl =
-	isset($result_itemTpl) ?
-	\ddTools::getTpl($result_itemTpl) :
-	'[+id+]'
-;
-$result_itemsGlue =
-	isset($result_itemsGlue) ?
-	$result_itemsGlue :
-	''
-;
-$result_toPlaceholder =
-	(
-		isset($result_toPlaceholder) &&
-		$result_toPlaceholder == '1'
-	) ?
-	true :
-	false
-;
-$result_toPlaceholder_name =
-	isset($result_toPlaceholder_name) ?
-	$result_toPlaceholder_name :
-	'ddParent'
-;
+//Defaults
+$params = \DDTools\ObjectTools::extend([
+	'objects' => [
+		(object) [
+			'id' => $modx->documentIdentifier,
+			'result_itemsNumber' => 1,
+			'result_itemTpl' => '@CODE:[+id+]',
+			'result_itemsGlue' => '',
+			'result_toPlaceholder' => false,
+			'result_toPlaceholder_name' => 'ddParent',
+			'level' => 1,
+		],
+		$params
+	]
+]);
 
-if (!isset($level)){
-	$level = 1;
+$params->result_itemTpl = \ddTools::getTpl($params->result_itemTpl);
+
+$params->result_toPlaceholder = boolval($params->result_toPlaceholder);
+
+//For backward compatibility
+if ($params->level == 'ultimate'){
+	$params->level = -1;
 }else{
-	//For backward compatibility
-	if ($level == 'ultimate'){
-		$level = -1;
-	}else{
-		$level = intval($level);
-	}
+	$params->level = intval($params->level);
 }
 
+
+//# Run
+
+//The snippet must return an empty string even if result is absent
+$snippetResult = '';
+
 $parents = \ddTools::getDocumentParentIds([
-	'docId' => $id,
-	'level' => $level,
-	'totalResults' => $result_itemsNumber
+	'docId' => $params->id,
+	'level' => $params->level,
+	'totalResults' => $params->result_itemsNumber
 ]);
 
 foreach (
@@ -89,7 +78,7 @@ foreach (
 ){
 	//Parse item
 	$parents[$parentIndex] = \ddTools::parseText([
-		'text' => $result_itemTpl,
+		'text' => $params->result_itemTpl,
 		'data' => [
 			'id' => $parentId
 		]
@@ -102,14 +91,14 @@ foreach (
 }
 
 $snippetResult = implode(
-	$result_itemsGlue,
+	$params->result_itemsGlue,
 	$parents
 );
 
 //Если надо, выводим в плэйсхолдер
-if ($result_toPlaceholder){
+if ($params->result_toPlaceholder){
 	$modx->setPlaceholder(
-		$result_toPlaceholder_name,
+		$params->result_toPlaceholder_name,
 		$snippetResult
 	);
 	
