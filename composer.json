@@ -12,6 +12,18 @@
 		"evolution cms",
 		"ddgetparentid"
 	],
+	"homepage": "https://code.divandesign.biz/modx/ddgetparentid",
+	"support": {
+		"chat": "https://t.me/dd_code"
+	},
+	"authors": [
+		{
+			"name": "Ilyas Ronef",
+			"email": "ilyas@DivanDesign.ru",
+			"homepage": "https://ronef.ru",
+			"role": "Owner"
+		}
+	],
 	"require": {
 		"php": ">=5.4.0",
 		"dd/evolutioncms-libraries-ddtools": ">=0.60.0"
