@@ -78,4 +78,4 @@ Elements → Snippets: Create a new snippet with the following data
 * [Telegram chat](https://t.me/dd_code)
 
 
-<link rel="stylesheet" type="text/css" href="https://DivanDesign.ru/assets/files/ddMarkdown.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.githack.com/DivanDesign/CSS.ddMarkdown/master/style.min.css" />
