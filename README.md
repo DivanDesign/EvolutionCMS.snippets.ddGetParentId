@@ -9,10 +9,7 @@ Gets document parent ID(s) of the required level.
 * [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.60
 
 
-## Documentation
-
-
-### Installation
+## Installation
 
 Elements → Snippets: Create a new snippet with the following data
 
@@ -23,7 +20,7 @@ Elements → Snippets: Create a new snippet with the following data
 5. Snippet code (php): Insert content of the `ddGetParentId_snippet.php` file from the archive.
 
 
-### Parameters description
+## Parameters description
 
 * `id`
 	* Desctription: Document Id.
