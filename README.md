@@ -60,13 +60,13 @@ require_once(
 	* Default value: `[*id*]` (current document)
 	
 * `level`
-	* Desctription: Parent level
+	* Desctription: Parent level.
+	* Valid values:
 		* `1` — the immediate parent
 		* `2` — the parent of the immediate parent
 		* `-1` — the last parent
 		* `-2` — the parent before the last
-		* etc.
-	* Valid values: `integer`
+		* `integer` — etc
 	* Default value: `1`
 	
 * `result_itemsNumber`
@@ -82,7 +82,7 @@ require_once(
 		Available placeholders:
 		* `[+id+]` — Parent ID.
 	* Valid values:
-		* `string_chunkName`
+		* `stringChunkName`
 		* `string` — use inline templates starting with `@CODE:`
 	* Default value: `'@CODE:[+id+]'`
 	
