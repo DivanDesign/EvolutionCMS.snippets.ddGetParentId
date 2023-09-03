@@ -5,9 +5,9 @@
  * 
  * @see README.md
  * 
- * @link https://code.divandesign.biz/modx/ddgetparentid
+ * @link https://code.divandesign.ru/modx/ddgetparentid
  * 
- * @copyright 2011–2020 DD Group {@link https://DivanDesign.biz }
+ * @copyright 2011–2020 Ronef {@link https://Ronef.ru }
  */
 
 global $modx;

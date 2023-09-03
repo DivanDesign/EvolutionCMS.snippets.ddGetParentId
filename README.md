@@ -6,7 +6,7 @@ Gets document parent ID(s) of the required level.
 ## Requires
 * PHP >= 5.6
 * [(MODX)EvolutionCMS](https://github.com/evolution-cms/evolution) >= 1.1
-* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.biz/modx/ddtools) >= 0.60
+* [(MODX)EvolutionCMS.libraries.ddTools](https://code.divandesign.ru/modx/ddtools) >= 0.60
 
 
 ## Installation
@@ -74,7 +74,7 @@ Elements → Snippets: Create a new snippet with the following data
 
 ## Links
 
-* [Home page](https://code.divandesign.biz/modx/ddgetparentid)
+* [Home page](https://code.divandesign.ru/modx/ddgetparentid)
 * [Telegram chat](https://t.me/dd_code)
 
 
