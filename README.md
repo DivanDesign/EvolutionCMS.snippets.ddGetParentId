@@ -76,6 +76,8 @@ Elements → Snippets: Create a new snippet with the following data
 
 * [Home page](https://code.divandesign.ru/modx/ddgetparentid)
 * [Telegram chat](https://t.me/dd_code)
+* [Packagist](https://packagist.org/packages/dd/evolutioncms-snippets-ddgetparentid)
+* [GitHub](https://github.com/DivanDesign/EvolutionCMS.snippets.ddGetParentId)
 
 
 <link rel="stylesheet" type="text/css" href="https://raw.githack.com/DivanDesign/CSS.ddMarkdown/master/style.min.css" />
