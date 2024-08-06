@@ -6,7 +6,7 @@ class Snippet extends \DDTools\Snippet {
 		$version = '1.4.0',
 		
 		$params = [
-			//Defaults
+			// Defaults
 			'id' => 0,
 			'result_itemsNumber' => 1,
 			'result_itemTpl' => '@CODE:[+id+]',
@@ -30,24 +30,24 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * prepareParams
-	 * @version 1.0 (2023-09-04)
+	 * @version 1.0.1 (2024-08-06)
 	 * 
 	 * @param $params {stdClass|arrayAssociative|stringJsonObject|stringHjsonObject|stringQueryFormatted}
 	 * 
 	 * @return {void}
 	 */
 	protected function prepareParams($params = []){
-		//Call base method
+		// Call base method
 		parent::prepareParams($params);
 		
-		//ID is not set or invalid
+		// ID is not set or invalid
 		if ($this->params->id <= 0){
 			$this->params->id = \ddTools::$modx->documentIdentifier;
 		}
 		
 		$this->params->result_itemTpl = \ddTools::getTpl($this->params->result_itemTpl);
 		
-		//For backward compatibility
+		// For backward compatibility
 		if ($this->params->level == 'ultimate'){
 			$this->params->level = -1;
 		}else{
@@ -57,7 +57,7 @@ class Snippet extends \DDTools\Snippet {
 	
 	/**
 	 * run
-	 * @version 1.0 (2023-09-04)
+	 * @version 1.0.1 (2024-08-06)
 	 * 
 	 * @return {string|object|array}
 	 */
@@ -75,7 +75,7 @@ class Snippet extends \DDTools\Snippet {
 			$parentIndex =>
 			$parentId
 		){
-			//Parse item
+			// Parse item
 			$parents[$parentIndex] = \ddTools::parseText([
 				'text' => $this->params->result_itemTpl,
 				'data' => [
@@ -83,7 +83,7 @@ class Snippet extends \DDTools\Snippet {
 				]
 			]);
 			
-			//Remove empty items
+			// Remove empty items
 			if (empty($parents[$parentIndex])){
 				unset($parents[$parentIndex]);
 			}
@@ -94,7 +94,7 @@ class Snippet extends \DDTools\Snippet {
 			$parents
 		);
 		
-		//Если надо, выводим в плэйсхолдер
+		// Если надо, выводим в плэйсхолдер
 		if ($this->params->result_toPlaceholder){
 			\ddTools::$modx->setPlaceholder(
 				$this->params->result_toPlaceholder_name,

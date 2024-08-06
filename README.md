@@ -17,13 +17,13 @@ Gets document parent ID(s) of the required level.
 Just run the following PHP code in your sources or [Console](https://github.com/vanchelo/MODX-Evolution-Ajax-Console):
 
 ```php
-//Include (MODX)EvolutionCMS.libraries.ddInstaller
+// Include (MODX)EvolutionCMS.libraries.ddInstaller
 require_once(
 	$modx->getConfig('base_path') .
 	'assets/libs/ddInstaller/require.php'
 );
 
-//Install (MODX)EvolutionCMS.snippets.ddGetParentId
+// Install (MODX)EvolutionCMS.snippets.ddGetParentId
 \DDInstaller::install([
 	'url' => 'https://github.com/DivanDesign/EvolutionCMS.snippets.ddGetParentId',
 	'type' => 'snippet'
@@ -110,13 +110,13 @@ require_once(
 ### Run the snippet through `\DDTools\Snippet::runSnippet` without DB and eval
 
 ```php
-//Include (MODX)EvolutionCMS.libraries.ddTools
+// Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
 	$modx->getConfig('base_path') .
 	'assets/libs/ddTools/modx.ddtools.class.php'
 );
 
-//Run (MODX)EvolutionCMS.snippets.ddGetParentId
+// Run (MODX)EvolutionCMS.snippets.ddGetParentId
 \DDTools\Snippet::runSnippet([
 	'name' => 'ddGetParentId',
 	'params' => [
